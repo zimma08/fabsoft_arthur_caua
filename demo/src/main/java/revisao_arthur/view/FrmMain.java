@@ -1,20 +1,20 @@
 package revisao_arthur.view;
 
-import java.awt.GridLayout;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import revisao_arthur.controller.ControllerCliente;
+
+import java.awt.GridLayout;
 
 public class FrmMain extends JFrame {
     private JLabel lblId, lblNome, lblEndereco;
     private JTextField txtId, txtNome, txtEndereco;
 
     private JButton btnSalvar, btnSair;
-
 
     public FrmMain() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,12 +23,14 @@ public class FrmMain extends JFrame {
         //var texto = new JLabel("Meu texto");
         //getContentPane().add(texto);
         painelCampos();
+        painelBotoes();
         setVisible(true);
     }
     private void painelBotoes(){
         ControllerCliente controller = new ControllerCliente();
+
         JPanel painel = new JPanel();
-        btnSalvar= new JButton("Salvar");
+        btnSalvar = new JButton("Salvar");
         painel.add(btnSalvar);
         btnSalvar.addActionListener(controller);
 
@@ -38,7 +40,6 @@ public class FrmMain extends JFrame {
 
         getContentPane().add(painel,"South");
     }
-
     private void painelCampos(){
         JPanel painel = new JPanel();
         painel.setLayout(new GridLayout(3,2));
