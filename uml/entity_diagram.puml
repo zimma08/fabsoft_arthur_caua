@@ -1,0 +1,65 @@
+@startuml
+package br.univille.projfabsoftcarros.entity {
+    class Car {
+        - Long id
+        - String make
+        - String model
+        - int year
+        --
+        + Long getId()
+        + void setId(Long id)
+        + String getMake()
+        + void setMake(String make)
+        + String getModel()
+        + void setModel(String model)
+        + int getYear()
+        + void setYear(int year)
+    }
+
+    class Customer {
+        - Long id
+        - String name
+        - String email
+        --
+        + Long getId()
+        + void setId(Long id)
+        + String getName()
+        + void setName(String name)
+        + String getEmail()
+        + void setEmail(String email)
+    }
+
+    class Order {
+        - Long id
+        - LocalDate date
+        - Customer customer
+        - Car car
+        --
+        + Long getId()
+        + void setId(Long id)
+        + LocalDate getDate()
+        + void setDate(LocalDate date)
+        + Customer getCustomer()
+        + void setCustomer(Customer customer)
+        + Car getCar()
+        + void setCar(Car car)
+    }
+
+    class Employee {
+        - Long id
+        - String name
+        - String position
+        --
+        + Long getId()
+        + void setId(Long id)
+        + String getName()
+        + void setName(String name)
+        + String getPosition()
+        + void setPosition(String position)
+    }
+
+    // Relationships
+    Order --> Customer : "customer"
+    Order --> Car : "car"
+}
+@enduml
