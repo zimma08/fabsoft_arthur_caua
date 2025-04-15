@@ -12,7 +12,7 @@ public class Carro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     private String marca;
     private String modelo;
@@ -23,7 +23,7 @@ public class Carro {
     private Cliente cliente;
 
     // Getters e Setters
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

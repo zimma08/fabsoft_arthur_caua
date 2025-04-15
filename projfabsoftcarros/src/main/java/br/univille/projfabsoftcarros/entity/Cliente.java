@@ -8,7 +8,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     private String nome;
     private String email;
@@ -18,7 +18,7 @@ public class Cliente {
     private List<Carro> carros;
 
     // Getters e Setters
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

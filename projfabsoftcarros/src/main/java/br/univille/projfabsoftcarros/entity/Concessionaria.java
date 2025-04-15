@@ -8,7 +8,7 @@ public class Concessionaria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  long id;
 
     private String nome;
 
@@ -16,7 +16,7 @@ public class Concessionaria {
     private List<Funcionario> funcionarios;
 
     // Getters e Setters
-    public Long getId() {
+    public long Id() {
         return id;
     }
 
