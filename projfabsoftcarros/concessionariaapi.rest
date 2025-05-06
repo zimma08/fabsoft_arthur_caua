@@ -1,0 +1,34 @@
+### API CONCESSIONÁRIAS - GET
+
+GET http://localhost:8080/api/v1/concessionarias
+
+### API CONCESSIONÁRIAS - POST
+
+POST http://localhost:8080/api/v1/concessionarias
+Content-Type: application/json
+
+{
+    "id": 0,
+    "nome": "Zimbas Concessionária",
+    "endereco": "Rua Itajuba, 210",
+    "telefone": "3344-2211",
+    "email": "contato@zimbasconecessionaria.com"
+}
+
+### API CONCESSIONÁRIAS - PUT
+
+PUT http://localhost:8080/api/v1/concessionarias/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "nome": "Zimbas Concessionária",
+    "endereco": "Rua Itajuba, 210",
+    "telefone": "3344-2211",
+    "email": "contato@zimbasconecessionaria.com"
+}
+
+### API CONCESSIONÁRIAS - DELETE
+
+DELETE http://localhost:8080/api/v1/concessionarias/1
+Content-Type: application/json

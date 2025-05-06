@@ -1,0 +1,38 @@
+### API PEDIDOS - GET
+
+GET http://localhost:8080/api/v1/pedidos
+
+### API PEDIDOS - POST
+
+POST http://localhost:8080/api/v1/pedidos
+Content-Type: application/json
+
+{
+    "id": 0,
+    "dataPedido": "2025-02-20",
+    "status": "Em andamento",
+    "carroId": 1,
+    "clienteId": 2,
+    "funcionarioId": 1
+}
+
+
+### API PEDIDOS - PUT
+
+PUT http://localhost:8080/api/v1/pedidos/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "dataPedido": "2025-02-20",
+    "status": "Em andamento",
+    "carroId": 1,
+    "clienteId": 2,
+    "funcionarioId": 1
+}
+
+
+### API PEDIDOS - DELETE
+
+DELETE http://localhost:8080/api/v1/pedidos/1
+Content-Type: application/json

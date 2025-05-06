@@ -1,0 +1,36 @@
+### API FUNCIONÁRIOS - GET
+
+GET http://localhost:8080/api/v1/funcionarios
+
+### API FUNCIONÁRIOS - POST
+
+POST http://localhost:8080/api/v1/funcionarios
+Content-Type: application/json
+
+{
+    "id": 0,
+    "nome": "Caua Richard",
+    "cargo": "Vendedor",
+    "salario": 3000.00,
+    "email": "cauarichard@gmail.com",
+    "telefone": "9992-2456"
+}
+
+### API FUNCIONÁRIOS - PUT
+
+PUT http://localhost:8080/api/v1/funcionarios/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "nome": "Caua Richard",
+    "cargo": "Vendedor",
+    "salario": 3000.00,
+    "email": "cauarichard@gmail.com",
+    "telefone": "9992-2456"
+}
+
+### API FUNCIONÁRIOS - DELETE
+
+DELETE http://localhost:8080/api/v1/funcionarios/1
+Content-Type: application/json

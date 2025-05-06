@@ -1,2 +1,34 @@
-### API CLIENTE - GET 
+### API CLIENTE - GET
+
 GET http://localhost:8080/api/v1/clientes
+
+### API CLIENTE - POST 
+
+POST http://localhost:8080/api/v1/clientes
+Content-Type: application/json
+
+{
+    "id": 0,
+    "nome": "miguel",
+    "endereco": "rua pato branco 111",
+    "telefone": "7777-1111",
+    "email": "miguel@gmail.com"
+}
+
+### API CLIENTE - PUT 
+
+PUT http://localhost:8080/api/v1/clientes/1
+Content-Type: application/json
+
+{
+    "id": 0,
+    "nome": "miguel",
+    "endereco": "rua pato branco 111",
+    "telefone": "7777-1111",
+    "email": "miguel@gmail.com"
+}
+
+### API CLIENTE - DELETE
+
+DELETE http://localhost:8080/api/v1/clientes/1
+Content-Type: application/json
