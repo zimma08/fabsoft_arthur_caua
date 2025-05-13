@@ -1,6 +1,7 @@
 package br.univille.projfabsoftcarros.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,11 @@ public class CarroServiceImpl implements CarroService {
     @Override
     public List<Carro> getAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public Optional<Carro> getById(long id) {
+        return repository.findById(id);
     }
 
     @Override

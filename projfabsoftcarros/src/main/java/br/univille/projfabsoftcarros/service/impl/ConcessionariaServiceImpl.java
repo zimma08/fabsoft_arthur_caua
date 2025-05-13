@@ -1,6 +1,7 @@
 package br.univille.projfabsoftcarros.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,10 @@ public class ConcessionariaServiceImpl implements ConcessionariaService {
     @Override
     public void delete(long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Concessionaria> getById(long id) {
+        return repository.findById(id);
     }
 }

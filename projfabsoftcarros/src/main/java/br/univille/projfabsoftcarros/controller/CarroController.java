@@ -1,6 +1,7 @@
 package br.univille.projfabsoftcarros.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,8 @@ public class CarroController {
 
     @GetMapping
     public ResponseEntity<List<Carro>> getCarros() {
-        var listaCarros = service.getAll();
-        return new ResponseEntity<>(listaCarros, HttpStatus.OK);
+        List<Carro> listaCarros = service.getAll();
+        return ResponseEntity.ok(listaCarros);
     }
 
     @PostMapping
@@ -29,23 +30,40 @@ public class CarroController {
             return ResponseEntity.badRequest().build();
         }
 
-        service.save(carro);
-        return new ResponseEntity<>(carro, HttpStatus.CREATED);
+        Carro novoCarro = service.save(carro);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoCarro);
     }
 
-    @PutMapping
-    public ResponseEntity<Carro> putCarro(@RequestBody Carro carro) {
-        if (carro == null || carro.getId() == 0) {
-            return ResponseEntity.badRequest().build();
+    @PutMapping("/{id}")
+    public ResponseEntity<Carro> putCarro(@PathVariable long id, @RequestBody Carro carro) {
+        if (id <= 0 || carro == null) {
+            return ResponseEntity.badRequest().build();  
         }
-
-        service.save(carro);
-        return new ResponseEntity<>(carro, HttpStatus.OK);
+    
+        Optional<Carro> carroExistente = service.getById(id); 
+    
+        if (carroExistente.isEmpty()) {
+            return ResponseEntity.notFound().build();  
+        }
+    
+        Carro carroAntigo = carroExistente.get(); 
+    
+       
+        if (carro.getCliente() != null) {
+            carroAntigo.setCliente(carro.getCliente());  
+        }
+        carroAntigo.setMarca(carro.getMarca());        
+        carroAntigo.setModelo(carro.getModelo());      
+        carroAntigo.setAno(carro.getAno());          
+    
+        service.save(carroAntigo);  
+        return ResponseEntity.ok(carroAntigo);  
     }
+    
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCarro(@PathVariable long id) {
         service.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 }

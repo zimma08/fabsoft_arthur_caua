@@ -10,19 +10,20 @@ public class Concessionaria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     private String nome;
 
     @OneToMany(mappedBy = "concessionaria")
     private List<Funcionario> funcionarios;
 
-    // Getters e Setters
-    public long Id() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    
 
     public String getNome() {
         return nome;

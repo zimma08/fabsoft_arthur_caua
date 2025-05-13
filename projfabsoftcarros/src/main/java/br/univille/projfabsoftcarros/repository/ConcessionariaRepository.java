@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.univille.projfabsoftcarros.entity.Concessionaria;
 
 public interface ConcessionariaRepository extends JpaRepository<Concessionaria, Long> {
-    // Aqui você pode adicionar métodos personalizados, se necessário
+    // O Spring Data JPA já fornece métodos como findById()
 }

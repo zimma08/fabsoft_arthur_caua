@@ -29,4 +29,9 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     public void delete(long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public Funcionario getById(long id) {
+        return repository.findById(id).orElse(null);
+    }
 }

@@ -1,22 +1,18 @@
 package br.univille.projfabsoftcarros.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.univille.projfabsoftcarros.entity.Cliente;
 import br.univille.projfabsoftcarros.service.ClienteService;
 
 @RestController
 @RequestMapping("/api/v1/clientes")
-
 public class ClienteController {
     
     @Autowired
@@ -24,26 +20,36 @@ public class ClienteController {
 
     @GetMapping
     public ResponseEntity<List<Cliente>> getClientes() {
-        var ListaClientes = service.getAll();
-
-        return new ResponseEntity<List<Cliente>>(ListaClientes, HttpStatus.OK);
+        var listaClientes = service.getAll();
+        return new ResponseEntity<>(listaClientes, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> postCliente(@RequestBody Cliente cliente){
-        if (cliente == null){
+    public ResponseEntity<Cliente> postCliente(@RequestBody Cliente cliente) {
+        if (cliente == null || cliente.getId() != 0) {
             return ResponseEntity.badRequest().build();
         }
-        if(cliente.getId() == 0){
         service.save(cliente);
-        return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
-    }
-    return ResponseEntity.badRequest().build();
-
+        return new ResponseEntity<>(cliente, HttpStatus.CREATED);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Cliente> putCliente(@PathVariable long id, @RequestBody Cliente cliente) {
+        if (id <= 0 || cliente == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Optional<Cliente> clienteAntigo = service.getById(id);
+        if (clienteAntigo.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Cliente clienteExistente = clienteAntigo.get();
+        clienteExistente.setNome(cliente.getNome());
+        clienteExistente.setEmail(cliente.getEmail());
+        clienteExistente.setSenha(cliente.getSenha());
+
+        service.save(clienteExistente);
+        return ResponseEntity.ok(clienteExistente);
     }
-
-
-    
-
+}

@@ -1,7 +1,6 @@
 package br.univille.projfabsoftcarros.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +24,7 @@ public class PedidoController {
 
     @PostMapping
     public ResponseEntity<Pedido> postPedido(@RequestBody Pedido pedido) {
+        
         if (pedido == null || pedido.getId() != null) {
             return ResponseEntity.badRequest().build();
         }
@@ -32,14 +32,24 @@ public class PedidoController {
         return new ResponseEntity<>(pedido, HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<Pedido> putPedido(@RequestBody Pedido pedido) {
-        if (pedido == null || pedido.getId() == null) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Pedido> putPedido(@PathVariable Long id, @RequestBody Pedido pedido) {
+        if (id == null || id <= 0 || pedido == null) {
             return ResponseEntity.badRequest().build();
         }
-        service.save(pedido);
-        return new ResponseEntity<>(pedido, HttpStatus.OK);
-    }
+    
+        Pedido pedidoExistente = service.getById(id);
+        if (pedidoExistente == null) {
+            return ResponseEntity.notFound().build();
+        }
+    
+        pedidoExistente.setData(pedido.getData());
+        pedidoExistente.setCarro(pedido.getCarro());
+        pedidoExistente.setCustomer(pedido.getCustomer());
+    
+        service.save(pedidoExistente);
+        return ResponseEntity.ok(pedidoExistente);
+    }    
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePedido(@PathVariable long id) {

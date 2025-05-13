@@ -1,12 +1,14 @@
 package br.univille.projfabsoftcarros.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import br.univille.projfabsoftcarros.entity.Carro;
 import br.univille.projfabsoftcarros.entity.Concessionaria;
 import br.univille.projfabsoftcarros.service.ConcessionariaService;
 
@@ -25,21 +27,31 @@ public class ConcessionariaController {
 
     @PostMapping
     public ResponseEntity<Concessionaria> postConcessionaria(@RequestBody Concessionaria concessionaria) {
-        if (concessionaria == null || concessionaria.Id() != 0) {
+        if (concessionaria == null || concessionaria.getId() != 0) {
             return ResponseEntity.badRequest().build();
         }
         service.save(concessionaria);
-        return new ResponseEntity<>(concessionaria, HttpStatus.CREATED);
+        return new ResponseEntity<Concessionaria>(concessionaria, HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<Concessionaria> putConcessionaria(@RequestBody Concessionaria concessionaria) {
-        if (concessionaria == null || concessionaria.Id() == 0) {
-            return ResponseEntity.badRequest().build();
+    @PutMapping("/{id}")
+    public ResponseEntity<Concessionaria> putConcessionaria(@PathVariable long id, @RequestBody Concessionaria concessionaria) {
+        if (id <= 0 || concessionaria == null) {
+            return ResponseEntity.badRequest().build();  
         }
-        service.save(concessionaria);
-        return new ResponseEntity<>(concessionaria, HttpStatus.OK);
+    
+        Optional<Concessionaria> concessionariaExistente = service.getById(id);  
+    
+        if (concessionariaExistente.isEmpty()) {
+            return ResponseEntity.notFound().build();  
+        }
+        Concessionaria concessionariaAntiga = concessionariaExistente.get();   
+        concessionariaAntiga.setNome(concessionaria.getNome());  
+        concessionariaAntiga.setFuncionarios(concessionaria.getFuncionarios());
+        service.save(concessionariaAntiga);  
+        return ResponseEntity.ok(concessionariaAntiga);  
     }
+    
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteConcessionaria(@PathVariable long id) {

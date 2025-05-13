@@ -7,4 +7,5 @@ public interface FuncionarioService {
     List<Funcionario> getAll();
     Funcionario save(Funcionario funcionario);
     void delete(long id);
+    Funcionario getById(long id); 
 }

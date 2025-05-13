@@ -9,11 +9,14 @@ Content-Type: application/json
 
 {
     "id": 0,
-    "dataPedido": "2025-02-20",
+    "data": "2025-02-20",
     "status": "Em andamento",
-    "carroId": 1,
-    "clienteId": 2,
-    "funcionarioId": 1
+    "carro": {
+        "id": 1
+    },
+    "cliente": {
+        "id": 2
+    }
 }
 
 

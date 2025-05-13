@@ -7,4 +7,5 @@ public interface PedidoService {
     List<Pedido> getAll();
     Pedido save(Pedido pedido);
     void delete(long id);
+    Pedido getById(long id); // <- Adicione esta linha
 }
