@@ -18,7 +18,7 @@ Content-Type: application/json
 
 ### API CARROS - PUT
 
-PUT http://localhost:8080/api/v1/carros/1
+PUT http://localhost:8080/api/v1/carros/2
 Content-Type: application/json
 
 {
@@ -32,5 +32,5 @@ Content-Type: application/json
 
 ### API CARROS - DELETE
 
-DELETE http://localhost:8080/api/v1/carros/1
+DELETE http://localhost:8080/api/v1/carros/2
 Content-Type: application/json

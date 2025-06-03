@@ -52,4 +52,9 @@ public class ClienteController {
         service.save(clienteExistente);
         return ResponseEntity.ok(clienteExistente);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCliente(@PathVariable long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build(); 
+    }
 }

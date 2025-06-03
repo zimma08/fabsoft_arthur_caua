@@ -16,12 +16,12 @@ Content-Type: application/json
 
 ### API CONCESSIONÁRIAS - PUT
 
-PUT http://localhost:8080/api/v1/concessionarias/1
+PUT http://localhost:8080/api/v1/concessionarias/2
 Content-Type: application/json
 
 {
     "id": 1,
-    "nome": "Zimbas Concessionária",
+    "nome": "Zimbas New Concessionária",
     "endereco": "Rua Itajuba, 210",
     "telefone": "3344-2211",
     "email": "contato@zimbasconecessionaria.com"
@@ -29,5 +29,5 @@ Content-Type: application/json
 
 ### API CONCESSIONÁRIAS - DELETE
 
-DELETE http://localhost:8080/api/v1/concessionarias/1
+DELETE http://localhost:8080/api/v1/concessionarias/2
 Content-Type: application/json

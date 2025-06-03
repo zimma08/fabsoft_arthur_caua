@@ -8,29 +8,33 @@ POST http://localhost:8080/api/v1/funcionarios
 Content-Type: application/json
 
 {
-    "id": 0,
     "nome": "Caua Richard",
-    "cargo": "Vendedor",
-    "salario": 3000.00,
-    "email": "cauarichard@gmail.com",
-    "telefone": "9992-2456"
+    "posicao": "Vendedor",
+    "concessionaria": {
+        "id": 1,
+        "nome": "Zimbas Concessionaria",
+        "funcionarios": null
+  }
 }
 
 ### API FUNCIONÁRIOS - PUT
 
-PUT http://localhost:8080/api/v1/funcionarios/1
+PUT http://localhost:8080/api/v1/funcionarios/2
 Content-Type: application/json
 
 {
+  "id": 1,
+  "nome": "Caua Richard",
+  "posicao": "Vendedor",
+  "concessionaria": {
     "id": 1,
-    "nome": "Caua Richard",
-    "cargo": "Vendedor",
-    "salario": 3000.00,
-    "email": "cauarichard@gmail.com",
-    "telefone": "9992-2456"
+    "nome": "Zimbas Concessionaria",
+    "funcionarios": null
+  }
 }
+
 
 ### API FUNCIONÁRIOS - DELETE
 
-DELETE http://localhost:8080/api/v1/funcionarios/1
+DELETE http://localhost:8080/api/v1/funcionarios/2
 Content-Type: application/json
