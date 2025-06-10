@@ -1,1 +1,30 @@
-<p>form-cliente works!</p>
+<main class="container">
+    <h2>Cliente</h2>
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="txtNome">Nome</label>
+                <input type="text"
+                    [(ngModel)]="cliente.nome"
+                    class="form-control"
+                    id="txtNome">
+            </div>
+            <div class="form-group">
+                <label for="txtEmail">Email</label>
+                <input type="text"
+                    [(ngModel)]="cliente.email"
+                    class="form-control"
+                    id="txtEmail">
+            </div>
+            <div class="form-group">
+                <label for="txtSenha">Senha</label>
+                <input type="text"
+                    [(ngModel)]="cliente.senha"
+                    class="form-control"
+                    id="txtSenha">
+            </div>
+        </div>
+        <button (click)="salvar()"
+        class="btn btn-primary">Salvar</button>
+    </div>
+</main>
