@@ -1,12 +1,15 @@
 <main class="container">
     <h2>Clientes</h2>
-    <table class="table">
-        <a routerlink="/cliente/novo" class="btn btn-primary">Novo</a>
+   
+        <a (click)="novo()" class="btn btn-primary">Novo</a>
+
+        <table class="table">
         <thead>
             <tr>
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Senha</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -15,9 +18,9 @@
                 <td>{{umCliente.email}}</td>
                 <td>{{umCliente.senha}}</td>
 
+                <td><a (click)="alterar(umCliente)"
+                    class="btn btn-secondary">Alterar</a></td>
             </tr>
         </tbody>
-
-
     </table>
 </main>

@@ -18,10 +18,19 @@ public class ClienteController {
     @Autowired
     private ClienteService service; 
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<Cliente>> getClientes() {
         var listaClientes = service.getAll();
         return new ResponseEntity<>(listaClientes, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Cliente> getClienteId(@PathVariable long id){
+        var umCliente = service.getById(id);
+        if(umCliente.isPresent())
+            return new ResponseEntity<Cliente>(umCliente.get(), HttpStatus.OK);
+            
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping
