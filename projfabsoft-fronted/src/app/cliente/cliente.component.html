@@ -1,26 +1,31 @@
 <main class="container">
     <h2>Clientes</h2>
-   
-        <a (click)="novo()" class="btn btn-primary">Novo</a>
-
-        <table class="table">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Senha</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let umCliente of listaClientes">
-                <td>{{umCliente.nome}}</td>
-                <td>{{umCliente.email}}</td>
-                <td>{{umCliente.senha}}</td>
-
-                <td><a (click)="alterar(umCliente)"
-                    class="btn btn-secondary">Alterar</a></td>
-            </tr>
-        </tbody>
+    
+    <a (click)="novo()" class="btn btn-primary">Novo</a>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Senha</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let umCliente of listaClientes">
+          <td>{{umCliente.nome}}</td>
+          <td>{{umCliente.email}}</td>
+          <td>{{umCliente.senha}}</td>
+  
+          <td>
+            <a (click)="alterar(umCliente)" class="btn btn-secondary">Alterar</a>
+            <!-- botão excluir -->
+            <a (click)="abrirConfirmacao(umCliente)" class="btn btn-danger">Excluir</a>
+            <!-- botão excluir -->
+          </td>
+        </tr>
+      </tbody>
     </table>
-</main>
+  </main>
+  
