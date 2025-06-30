@@ -1,0 +1,16 @@
+<form (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="marca" class="form-label">Marca</label>
+    <input id="marca" class="form-control" [(ngModel)]="carro.marca" name="marca" required>
+  </div>
+  <div class="mb-3">
+    <label for="modelo" class="form-label">Modelo</label>
+    <input id="modelo" class="form-control" [(ngModel)]="carro.modelo" name="modelo" required>
+  </div>
+  <div class="mb-3">
+    <label for="ano" class="form-label">Ano</label>
+    <input id="ano" class="form-control" [(ngModel)]="carro.ano" name="ano" required type="number">
+  </div>
+  <button type="submit" class="btn btn-primary">Salvar</button>
+  <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+</form>

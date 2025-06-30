@@ -1,0 +1,50 @@
+<app-form-concessionaria
+  *ngIf="mostrarFormulario"
+  (salvar)="salvarConcessionaria($event)"
+  (cancelar)="fecharFormulario()">
+</app-form-concessionaria>
+
+<main class="container" *ngIf="!mostrarFormulario">
+  <h2>Concessionárias</h2>
+  
+  <a (click)="novo()" class="btn btn-primary">Nova</a>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Funcionários</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let umaConcessionaria of listaConcessionarias">
+        <td>{{umaConcessionaria.nome}}</td>
+        <td>
+          {{ umaConcessionaria.funcionarios?.length || 0 }}
+        </td>
+        <td>
+          <a (click)="alterar(umaConcessionaria)" class="btn btn-secondary">Alterar</a>
+          <a (click)="abrirConfirmacao(umaConcessionaria)" class="btn btn-danger">Excluir</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+
+<div class="modal fade" *ngIf="mostrarModal" tabindex="-1" role="dialog" style="display:block; background:rgba(0,0,0,0.5)">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Excluir concessionária</h5>
+          </div>
+          <div class="modal-body">
+          Confirma a exclusão da concessionária?
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="fecharConfirmacao()">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="confirmarExclusao()">Sim</button>
+          </div>
+      </div>
+  </div>
+</div>

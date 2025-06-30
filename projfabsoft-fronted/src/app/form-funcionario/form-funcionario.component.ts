@@ -1,45 +1,28 @@
-import { Component } from '@angular/core';
-import { Funcionario } from '../model/funcionario';
-import { FuncionarioService } from '../service/funcionario.service';
-import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-form-funcionario',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './form-funcionario.component.html',
-  styleUrl: './form-funcionario.component.css',
-  providers: [FuncionarioService]
+  styleUrls: ['./form-funcionario.component.css']
 })
-export class FormFuncionarioComponent {
-    funcionario: Funcionario = new Funcionario();
+export class FormFuncionarioComponent implements OnInit {
+  @Input() funcionario: any = { nome: '', email: '', senha: '' };
+  @Output() salvar = new EventEmitter<any>();
+  listaConcessionarias: any[] = [];
 
-    constructor(
-      private funcionarioService: FuncionarioService,
-      private router: Router,
-      private activeRouter: ActivatedRoute
-    ) {
-      const id = this.activeRouter.snapshot.paramMap.get('id');
+  constructor(private http: HttpClient) {}
 
-      if (id) {
-        this.funcionarioService.getFuncionarioById(id).subscribe(funcionario => {
-          this.funcionario = funcionario;
-        });
-      }
-    }
+  ngOnInit(): void {
+    this.http.get<any[]>('/api/v1/concessionarias').subscribe(dados => {
+      this.listaConcessionarias = dados;
+    });
+  }
 
-    salvar() {
-      this.funcionarioService.saveFuncionario(this.funcionario)
-        .subscribe({
-          next: (resultado) => {
-            this.router.navigate(['funcionarios']);
-          },
-          error: (erro) => {
-            console.error('Erro ao salvar funcionário:', erro);
-          }
-        });
-    }
+  onSalvar() {
+    this.salvar.emit(this.funcionario);
+  }
 }

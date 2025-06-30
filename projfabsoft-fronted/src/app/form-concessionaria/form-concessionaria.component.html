@@ -1,0 +1,14 @@
+<form (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="txtNome">Nome</label>
+    <input type="text"
+           [(ngModel)]="concessionaria.nome"
+           class="form-control"
+           id="txtNome"
+           name="nome"
+           placeholder="Digite o nome da concessionária"
+           required>
+  </div>
+  <button type="submit" class="btn btn-primary">Salvar</button>
+  <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+</form>
