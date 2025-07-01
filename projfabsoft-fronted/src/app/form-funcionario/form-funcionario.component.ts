@@ -1,11 +1,15 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-form-funcionario',
-  standalone: true,
-  imports: [FormsModule],
+   standalone: true,
+  imports: [CommonModule,FormsModule, HttpClientModule],
   templateUrl: './form-funcionario.component.html',
   styleUrls: ['./form-funcionario.component.css']
 })

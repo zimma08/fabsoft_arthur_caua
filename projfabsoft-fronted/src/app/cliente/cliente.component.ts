@@ -8,12 +8,12 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cliente',
+  standalone: true,
   imports: [HttpClientModule, CommonModule],
   templateUrl: './cliente.component.html',
-  styleUrl: './cliente.component.css',
-  providers: [ClienteService, Router]
+  styleUrls: ['./cliente.component.css'],
+  providers: [ClienteService]
 })
-
 export class ClienteComponent implements OnInit {
   listaClientes: Cliente[] = [];
 
@@ -42,11 +42,11 @@ export class ClienteComponent implements OnInit {
     this.router.navigate(['clientes/novo']);
   }
 
-  alterar(cliente:Cliente) {
+  alterar(cliente: Cliente) {
     this.router.navigate(['clientes/alterar', cliente.id]);
   }
 
-  abrirConfirmacao(cliente:Cliente) {
+  abrirConfirmacao(cliente: Cliente) {
     this.clienteSelecionado = cliente;
     this.modal = new bootstrap.Modal(this.modalElement.nativeElement);
     this.modal.show();

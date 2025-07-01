@@ -1,27 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { FormConcessionariaComponent } from '../form-concessionaria/form-concessionaria.component';
-
+import { CommonModule } from '@angular/common';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-concessionaria',
   templateUrl: './concessionaria.component.html',
   standalone: true,
   imports: [
-    FormConcessionariaComponent
+    FormConcessionariaComponent, CommonModule
   ],
   styleUrls: ['./concessionaria.component.css']
 })
+
 export class ConcessionariaComponent implements OnInit {
   listaConcessionarias: any[] = [];
-  concessionariaSelecionada: any = null;
-  mostrarModal = false;
-  mostrarFormulario = false; // controle do formulário
+
+mostrarModal = false; 
+
+  @ViewChild('myModal') modalElement!: ElementRef;
+  private modal!: bootstrap.Modal;
+
+  private concessionariaSelecionada!: any;
+  mostrarFormulario = false;
   private apiUrl = '/api/v1/concessionarias';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.listarConcessionarias();
+  }
+
+  listarConcessionarias() {
     this.http.get<any[]>(this.apiUrl).subscribe(dados => {
       this.listaConcessionarias = dados;
     });
@@ -32,11 +47,10 @@ export class ConcessionariaComponent implements OnInit {
   }
 
   salvarConcessionaria(concessionaria: any) {
+    // Exemplo de POST, ajuste conforme sua API
     this.http.post(this.apiUrl, concessionaria).subscribe(() => {
-      this.http.get<any[]>(this.apiUrl).subscribe(dados => {
-        this.listaConcessionarias = dados;
-        this.mostrarFormulario = false;
-      });
+      this.listarConcessionarias();
+      this.mostrarFormulario = false;
     });
   }
 
@@ -44,27 +58,29 @@ export class ConcessionariaComponent implements OnInit {
     this.mostrarFormulario = false;
   }
 
-  alterar(umaConcessionaria: any) {
-    this.concessionariaSelecionada = { ...umaConcessionaria };
-    // abrir modal de edição, se houver
+  alterar(concessionaria: any) {
+    this.router.navigate(['concessionarias/alterar', concessionaria.id]);
   }
 
-  abrirConfirmacao(umaConcessionaria: any) {
-    this.concessionariaSelecionada = umaConcessionaria;
-    this.mostrarModal = true;
+  abrirConfirmacao(concessionaria: any) {
+    this.concessionariaSelecionada = concessionaria;
+    this.modal = new bootstrap.Modal(this.modalElement.nativeElement);
+    this.modal.show();
   }
 
   fecharConfirmacao() {
-    this.concessionariaSelecionada = null;
-    this.mostrarModal = false;
+    this.modal.hide();
   }
 
   confirmarExclusao() {
-    if (this.concessionariaSelecionada) {
-      this.http.delete(`${this.apiUrl}/${this.concessionariaSelecionada.id}`).subscribe(() => {
-        this.listaConcessionarias = this.listaConcessionarias.filter(c => c.id !== this.concessionariaSelecionada.id);
+    this.http.delete(`${this.apiUrl}/${this.concessionariaSelecionada.id}`).subscribe(
+      () => {
         this.fecharConfirmacao();
-      });
-    }
+        this.listarConcessionarias();
+      },
+      error => {
+        console.error('Erro ao excluir concessionária:', error);
+      }
+    );
   }
 }

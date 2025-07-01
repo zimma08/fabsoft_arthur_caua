@@ -36,5 +36,5 @@ Content-Type: application/json
 
 ### API FUNCIONÁRIOS - DELETE
 
-DELETE http://localhost:8080/api/v1/funcionarios/2
+DELETE http://localhost:8080/api/v1/funcionarios/16
 Content-Type: application/json

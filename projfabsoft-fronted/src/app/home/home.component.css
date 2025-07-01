@@ -1,0 +1,52 @@
+/* Navbar */
+.navbar {
+  background-color: #f8f9fa;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #ddd;
+}
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+.navbar-links a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+}
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+/* Container principal */
+.container {
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Card com botões */
+.card {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+.card button {
+  margin: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid #000;
+  background-color: #fff;
+  cursor: pointer;
+}
+.card button:hover {
+  background-color: #eee;
+}

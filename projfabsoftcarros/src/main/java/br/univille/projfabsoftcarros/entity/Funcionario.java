@@ -1,6 +1,8 @@
 package br.univille.projfabsoftcarros.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 public class Funcionario {
@@ -14,6 +16,7 @@ public class Funcionario {
 
     @ManyToOne
     @JoinColumn(name = "concessionaria_id") // chave estrangeira
+    @JsonBackReference
     private Concessionaria concessionaria;
 
     // Getters e Setters

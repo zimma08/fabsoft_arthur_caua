@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Carro } from '../model/carro'; // ajusta o caminho se necessário
+import { CarroService } from '../service/carro.service';
 
 @Component({
   selector: 'app-form-carro',
@@ -19,5 +21,7 @@ export class FormCarroComponent {
 
   onCancel() {
     this.cancelar.emit();
+
+    
   }
 }

@@ -1,16 +1,29 @@
-<form (ngSubmit)="onSubmit()">
-  <div class="mb-3">
-    <label for="marca" class="form-label">Marca</label>
-    <input id="marca" class="form-control" [(ngModel)]="carro.marca" name="marca" required>
+<main class="container">
+  <h2>Carro</h2>
+  <div class="card">
+      <div class="card-body">
+          <div class="form-group">
+              <label for="txtMarca">Marca</label>
+              <input type="text" [(ngModel)]="carro.marca" 
+              class="form-control" id="txtNome">
+          </div>
+
+          <div class="form-group">
+              <label for="txtModelo">Modelo</label>
+              <input type="text" [(ngModel)]="carro.modelo" 
+              class="form-control" id="txtModelo">
+          </div>
+
+          <div class="form-group">
+              <label for="txtPlaca">Placa</label>
+              <input type="text" [(ngModel)]="carro.placa" 
+              class="form-control" id="txtPlaca">
+          </div>
+          
+      </div>
+
+      <button (click)="salvar()"
+          class="btn btn-primary">Salvar</button>
+
   </div>
-  <div class="mb-3">
-    <label for="modelo" class="form-label">Modelo</label>
-    <input id="modelo" class="form-control" [(ngModel)]="carro.modelo" name="modelo" required>
-  </div>
-  <div class="mb-3">
-    <label for="ano" class="form-label">Ano</label>
-    <input id="ano" class="form-control" [(ngModel)]="carro.ano" name="ano" required type="number">
-  </div>
-  <button type="submit" class="btn btn-primary">Salvar</button>
-  <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
-</form>
+</main>

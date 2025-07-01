@@ -5,15 +5,16 @@ import { Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-funcionario',
-  imports: [HttpClientModule, CommonModule],
+  standalone: true,
+  imports: [HttpClientModule, CommonModule, FormsModule],
   templateUrl: './funcionario.component.html',
-  styleUrl: './funcionario.component.css',
+  styleUrls: ['./funcionario.component.css'],
   providers: [FuncionarioService, Router]
 })
-
 export class FuncionarioComponent implements OnInit {
   listaFuncionarios: Funcionario[] = [];
 
@@ -32,7 +33,6 @@ export class FuncionarioComponent implements OnInit {
   }
 
   listarFuncionarios() {
-    console.log("Carregando funcionarios...");
     this.funcionarioService.getFuncionarios().subscribe(funcionarios => {
       this.listaFuncionarios = funcionarios;
     });
@@ -42,11 +42,11 @@ export class FuncionarioComponent implements OnInit {
     this.router.navigate(['funcionarios/novo']);
   }
 
-  alterar(funcionario:Funcionario) {
+  alterar(funcionario: Funcionario) {
     this.router.navigate(['funcionarios/alterar', funcionario.id]);
   }
 
-  abrirConfirmacao(funcionario:Funcionario) {
+  abrirConfirmacao(funcionario: Funcionario) {
     this.funcionarioSelecionado = funcionario;
     this.modal = new bootstrap.Modal(this.modalElement.nativeElement);
     this.modal.show();
@@ -63,7 +63,7 @@ export class FuncionarioComponent implements OnInit {
         this.listarFuncionarios();
       },
       error => {
-        console.error('Erro ao excluir funcionarios:', error);
+        console.error('Erro ao excluir funcionário:', error);
       }
     );
   }
