@@ -48,7 +48,6 @@ public class CarroController {
     
         Carro carroAntigo = carroExistente.get(); 
     
-       
         if (carro.getCliente() != null) {
             carroAntigo.setCliente(carro.getCliente());  
         }

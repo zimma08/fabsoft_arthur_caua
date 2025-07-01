@@ -9,6 +9,7 @@
         <th>Marca</th>
         <th>Modelo</th>
         <th>Ano</th>
+        <th>Cliente</th>
         <th></th>
       </tr>
     </thead>
@@ -17,6 +18,7 @@
         <td>{{umCarro.marca}}</td>
         <td>{{umCarro.modelo}}</td>
         <td>{{umCarro.ano}}</td>
+        <td>{{umCarro.cliente?.nome}}</td>
         <td>
           <a (click)="alterar(umCarro)" class="btn btn-secondary">Alterar</a>
           <a (click)="abrirConfirmacao(umCarro)" class="btn btn-danger">Excluir</a>
@@ -26,7 +28,7 @@
   </table>
 </main>
 
-<div class="modal fade" *ngIf="mostrarModal" tabindex="-1" role="dialog" style="display:block; background:rgba(0,0,0,0.5)">
+<div class="modal fade" #myModal tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">

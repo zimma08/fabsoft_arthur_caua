@@ -1,27 +1,46 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Carro } from '../model/carro'; // ajusta o caminho se necessário
+import { Component } from '@angular/core';
+import { Carro } from '../model/carro';
 import { CarroService } from '../service/carro.service';
+import { ClienteService } from '../service/cliente.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Cliente } from '../model/cliente';
 
 @Component({
   selector: 'app-form-carro',
   standalone: true,
-  imports: [FormsModule],
+  imports: [HttpClientModule, CommonModule, FormsModule],
   templateUrl: './form-carro.component.html',
-  styleUrls: ['./form-carro.component.css']
+  styleUrl: './form-carro.component.css',
+  providers: [CarroService, ClienteService]
 })
 export class FormCarroComponent {
-  @Input() carro: any = { marca: '', modelo: '', ano: '' };
-  @Output() salvar = new EventEmitter<any>();
-  @Output() cancelar = new EventEmitter<void>();
+  carro: Carro = { id: 0, marca: '', modelo: '', ano: new Date().getFullYear(), cliente: { id: 0, nome: '' } };
+  clientes: Cliente[] = [];
 
-  onSubmit() {
-    this.salvar.emit(this.carro);
+  constructor(
+    private carroService: CarroService,
+    private clienteService: ClienteService,
+    private router: Router,
+    private activeRouter: ActivatedRoute
+  ) {
+    const id = this.activeRouter.snapshot.paramMap.get('id');
+    if (id) {
+      this.carroService.getCarroById(id).subscribe(carro => {
+        this.carro = carro;
+      });
+    }
+    this.clienteService.getAllClientes().subscribe(clientes => {
+      this.clientes = clientes;
+    });
   }
 
-  onCancel() {
-    this.cancelar.emit();
-
-    
+  salvar() {
+    this.carroService.saveCarro(this.carro)
+      .subscribe(resultado => {
+        this.router.navigate(['carros']);
+      });
   }
 }

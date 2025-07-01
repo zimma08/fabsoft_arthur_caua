@@ -1,5 +1,6 @@
 package br.univille.projfabsoftcarros.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class Cliente {
     private String senha;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore // ADICIONE ESTA LINHA
     private List<Carro> carros;
 
     // Getters e Setters

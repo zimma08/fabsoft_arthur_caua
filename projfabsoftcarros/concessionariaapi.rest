@@ -29,5 +29,5 @@ Content-Type: application/json
 
 ### API CONCESSIONÁRIAS - DELETE
 
-DELETE http://localhost:8080/api/v1/concessionarias/2
+DELETE http://localhost:8080/api/v1/concessionarias/4
 Content-Type: application/json

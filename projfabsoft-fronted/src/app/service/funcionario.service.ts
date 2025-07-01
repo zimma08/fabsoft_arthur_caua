@@ -5,29 +5,27 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-
 export class FuncionarioService {
-  apiURL = "/api/v1/funcionarios";
+  apiURL = "http://localhost:8080/api/v1/funcionarios";
   
-  constructor(private http: HttpClient) { }
+  constructor(private http:HttpClient) { }
 
-  getFuncionarios() {
+  getFuncionarios(){
     return this.http.get<Funcionario[]>(this.apiURL);
   }
 
-  saveFuncionario(funcionario: Funcionario) {
-    if (funcionario.id) {
+  saveFuncionario(funcionario:Funcionario){
+    if(funcionario.id){
       return this.http.put(this.apiURL + '/' + funcionario.id, funcionario);
     }
-    return this.http.post(this.apiURL, funcionario);
+    return this.http.post(this.apiURL,funcionario);
   }
 
   getFuncionarioById(id: any) {
     return this.http.get<Funcionario>(this.apiURL + '/' + id);
   }
 
-  excluirFuncionario(id: any) {
+  excluirFuncionario(id: any){
     return this.http.delete<Funcionario>(this.apiURL + '/' + id);
   }
 }
-

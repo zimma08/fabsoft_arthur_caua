@@ -1,39 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Carro } from '../model/carro';  // ajuste o caminho se necessário
 import { Observable } from 'rxjs';
+import { Carro } from '../model/carro';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarroService {
+  private apiUrl = 'http://localhost:8080/api/v1/carros'; // ajuste conforme seu backend
 
-  // URL base da sua API de carros - ajuste conforme sua API backend
-  apiURL = "http://localhost:8080/api/v1/carros";
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  // Busca todos os carros
-  getCarros(): Observable<Carro[]> {
-    return this.http.get<Carro[]>(this.apiURL);
+  getCarroById(id: string): Observable<Carro> {
+    return this.http.get<Carro>(`${this.apiUrl}/${id}`);
   }
 
-  // Salva um novo carro ou atualiza um existente
   saveCarro(carro: Carro): Observable<Carro> {
-    if (carro.id) {
-      return this.http.put<Carro>(`${this.apiURL}/${carro.id}`, carro);
+    if (carro.id && carro.id !== 0) {
+      return this.http.put<Carro>(`${this.apiUrl}/${carro.id}`, carro);
     } else {
-      return this.http.post<Carro>(this.apiURL, carro);
+      return this.http.post<Carro>(this.apiUrl, carro);
     }
-  }
-
-  // Busca um carro pelo ID
-  getCarroById(id: number): Observable<Carro> {
-    return this.http.get<Carro>(`${this.apiURL}/${id}`);
-  }
-
-  // Exclui um carro pelo ID
-  excluirCarro(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiURL}/${id}`);
   }
 }

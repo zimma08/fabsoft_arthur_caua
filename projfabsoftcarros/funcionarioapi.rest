@@ -8,8 +8,8 @@ POST http://localhost:8080/api/v1/funcionarios
 Content-Type: application/json
 
 {
-    "nome": "Caua Richard",
-    "posicao": "Vendedor",
+    "nome": "João Neves",
+    "posicao": "Administativo",
     "concessionaria": {
         "id": 1,
         "nome": "Zimbas Concessionaria",
@@ -36,5 +36,5 @@ Content-Type: application/json
 
 ### API FUNCIONÁRIOS - DELETE
 
-DELETE http://localhost:8080/api/v1/funcionarios/16
+DELETE http://localhost:8080/api/v1/funcionarios/18
 Content-Type: application/json

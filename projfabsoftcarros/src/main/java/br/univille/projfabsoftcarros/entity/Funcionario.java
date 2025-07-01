@@ -1,8 +1,8 @@
 package br.univille.projfabsoftcarros.entity;
 
-import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.*;
 
 @Entity
 public class Funcionario {

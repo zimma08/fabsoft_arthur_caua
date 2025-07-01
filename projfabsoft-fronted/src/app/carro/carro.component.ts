@@ -1,40 +1,29 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import * as bootstrap from 'bootstrap';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { CarroService } from '../service/carro.service';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-carro',
   standalone: true,
   imports: [CommonModule, HttpClientModule],
-  templateUrl: './carro.component.html',
-  styleUrls: ['./carro.component.css']
+  templateUrl: './carro.component.html'
 })
 export class CarroComponent implements OnInit {
   listaCarros: any[] = [];
-
-  mostrarModal = false;
-
-  @ViewChild('myModal') modalElement!: ElementRef;
-  private modal!: bootstrap.Modal;
-
-  private carroSelecionado!: any;
-  private apiUrl = '/api/v1/carros';
+  carroSelecionado: any = null;
 
   constructor(
-    private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private carroService: CarroService,
+    private http: HttpClient // Adicione o HttpClient aqui
   ) {}
 
-  ngOnInit(): void {
-    this.listarCarros();
-  }
-
-  listarCarros() {
-    this.http.get<any[]>(this.apiUrl).subscribe(dados => {
-      this.listaCarros = dados;
-    });
+  ngOnInit() {
+    this.http.get<any[]>('http://localhost:8080/api/v1/carros')
+      .subscribe(data => this.listaCarros = data);
   }
 
   novo() {
@@ -42,28 +31,24 @@ export class CarroComponent implements OnInit {
   }
 
   alterar(carro: any) {
-    this.router.navigate(['carros/alterar', carro.id]);
+    // Navegar para o formulário de alteração
   }
 
   abrirConfirmacao(carro: any) {
     this.carroSelecionado = carro;
-    this.modal = new bootstrap.Modal(this.modalElement.nativeElement);
-    this.modal.show();
+    // Abrir modal de confirmação
   }
 
   fecharConfirmacao() {
-    this.modal.hide();
+    this.carroSelecionado = null;
+    // Fechar modal
   }
 
   confirmarExclusao() {
-    this.http.delete(`${this.apiUrl}/${this.carroSelecionado.id}`).subscribe(
-      () => {
-        this.fecharConfirmacao();
-        this.listarCarros();
-      },
-      error => {
-        console.error('Erro ao excluir carro:', error);
-      }
-    );
+    if (this.carroSelecionado) {
+      // Chamar serviço para excluir
+      // this.carroService.delete(this.carroSelecionado.id).subscribe(...)
+      this.fecharConfirmacao();
+    }
   }
 }
